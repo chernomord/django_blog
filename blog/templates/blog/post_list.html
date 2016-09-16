@@ -18,7 +18,7 @@
 <div class="content container">
     <div class="row">
         <div class="col-md-8">
-            {% for post in posts.order_by %}
+            {% for post in posts %}
                 <div class="post">
                     <p class="date">published {{ post.published_date }}</p>
                     <h1><a href="">{{ post.title }}</a></h1>
