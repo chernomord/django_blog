@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load markdown_filter %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,11 +18,11 @@
 <div class="content container">
     <div class="row">
         <div class="col-md-8">
-            {% for post in posts %}
+            {% for post in posts.order_by %}
                 <div class="post">
                     <p class="date">published {{ post.published_date }}</p>
                     <h1><a href="">{{ post.title }}</a></h1>
-                    <p>{{ post.text | safe }}</p>
+                    <p>{{ post.text|read_markdown|safe }}</p>
                 </div>
             {% endfor %}
         </div>
