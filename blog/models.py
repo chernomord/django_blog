@@ -3,7 +3,17 @@ from django.utils import timezone
 
 
 class Post(models.Model):
+
+    # def def_route(self):
+    #     route = self.title.replace(" ", "-")
+    #     return route
+
     author = models.ForeignKey('auth.User')
+    route = models.CharField(max_length=40,
+                             auto_created=True,
+                             db_index=True,
+                             blank=False,
+                             default='Default title')
     title = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(
