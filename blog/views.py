@@ -12,6 +12,13 @@ def post_list(request):
     })
 
 
+def post_draft_list(request):
+    posts = Post.objects.filter(published_date__isnull=True).order_by('-created_date')
+    return render(request, 'blog/post_draft_list.html', {
+        'posts': posts,
+    })
+
+
 def post_detail(request, post_name):
     post = get_object_or_404(Post, route=post_name)
     return render(request, 'blog/post_detail.html', {
@@ -19,15 +26,28 @@ def post_detail(request, post_name):
     })
 
 
+def post_publish(request, post_name):
+    post = get_object_or_404(Post, route=post_name)
+    post.publish()
+    return redirect('post_detail', post_name=post.route)
+
+
+def post_remove(request, post_name):
+    post = get_object_or_404(Post, route=post_name)
+    post.delete()
+    return redirect('post_list')
+
+
 def post_new(request):
 
     if request.method == 'POST':
         form = PostForm(request.POST)
+        # TODO: Add non unique route handler
         if form.is_valid():
             post = form.save(commit=False)
             post.route = slugify(post.title, allow_unicode=True)
             post.author = request.user
-            post.published_date = timezone.now()
+            # post.published_date = timezone.now()
             post.save()
             return redirect('post_detail', post_name=post.route)
     else:

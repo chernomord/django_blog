@@ -4,10 +4,6 @@ from django.utils import timezone
 
 class Post(models.Model):
 
-    # def def_route(self):
-    #     route = self.title.replace(" ", "-")
-    #     return route
-
     author = models.ForeignKey('auth.User')
     route = models.CharField(max_length=40,
                              auto_created=True,

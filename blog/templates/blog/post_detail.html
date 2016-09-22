@@ -7,11 +7,14 @@
             <a class="btn btn-default" href="{% url 'post_edit' post_name=post.route %}">
                 <span class="glyphicon glyphicon-pencil"></span>
             </a>
+            <a class="btn btn-default" href="{% url 'post_remove' post_name=post.route %}"><span class="glyphicon glyphicon-remove"></span></a>
         {% endif %}
         {% if post.published_date %}
             <div class="date">
                 {{ post.published_date }}
             </div>
+        {% elif user.is_authenticated %}
+            <a class="btn btn-default" href="{% url 'post_publish' post_name=post.route %}">Publish</a>
         {% endif %}
         <h1>{{ post.title }}</h1>
         <p>{{ post.text|read_markdown|safe }}</p>
