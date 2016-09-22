@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.utils.text import slugify
+from django.contrib.auth.decorators import login_required
 from .models import Post
 from .forms import PostForm
 
@@ -12,6 +13,7 @@ def post_list(request):
     })
 
 
+@login_required
 def post_draft_list(request):
     posts = Post.objects.filter(published_date__isnull=True).order_by('-created_date')
     return render(request, 'blog/post_draft_list.html', {
@@ -26,18 +28,21 @@ def post_detail(request, post_name):
     })
 
 
+@login_required
 def post_publish(request, post_name):
     post = get_object_or_404(Post, route=post_name)
     post.publish()
     return redirect('post_detail', post_name=post.route)
 
 
+@login_required
 def post_remove(request, post_name):
     post = get_object_or_404(Post, route=post_name)
     post.delete()
     return redirect('post_list')
 
 
+@login_required
 def post_new(request):
 
     if request.method == 'POST':
