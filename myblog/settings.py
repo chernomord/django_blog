@@ -95,7 +95,16 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 #         'PORT': '',
 #     }
 # }
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'myblog',
+#         'USER': 'slava',
+#         'PASSWORD': '',
+#         'HOST': os.environ['DATABASE_URL'],
+#         'PORT': '',
+#     }
+# }
 
 
 # Password validation
@@ -139,8 +148,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Production settings
 
-
-DATABASES['default'] = dj_database_url.config()
+DATABASES = {
+    'default': dj_database_url.config()
+}
+# DATABASES['default'] = dj_database_url.config()
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
