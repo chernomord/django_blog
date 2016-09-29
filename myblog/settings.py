@@ -85,16 +85,16 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'myblog',
-        'USER': 'slava',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'myblog',
+#         'USER': 'slava',
+#         'PASSWORD': '',
+#         'HOST': os.environ['DATABASE_URL'],
+#         'PORT': '',
+#     }
+# }
 
 
 
