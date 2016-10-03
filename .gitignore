@@ -6,3 +6,6 @@ db.sqlite3
 .DS_Store
 staticfiles
 local_settings.py
+*.sublime-project
+*.sublime-workspace
+local_settings.py
