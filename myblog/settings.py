@@ -154,7 +154,7 @@ DATABASES['default'].update(db_from_env)
 # DATABASES['default'] = dj_database_url.config()
 # DATABASES['default']['OPTIONS'] = {
 #     'sslmode': 'require'
-}
+# }
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
