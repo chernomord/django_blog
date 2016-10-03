@@ -98,11 +98,11 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd24f925l497aaq',
-        'USER': 'btzuneiocqwpvn',
+        'NAME': '----',
+        'USER': '----',
         'PASSWORD': '',
-        'HOST': 'ec2-54-83-31-65.compute-1.amazonaws.com',
-        'PORT': '5432',
+        'HOST': '----',
+        'PORT': '---',
     }
 }
 
