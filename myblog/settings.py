@@ -21,7 +21,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['DJ_SECRET_KEY']
+try:
+    SECRET_KEY = os.environ['DJ_SECRET_KEY']
+except:
+    pass
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
@@ -43,13 +46,14 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
 ]
 
 ROOT_URLCONF = 'myblog.urls'
@@ -84,25 +88,9 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'myblog',
-#         'USER': 'slava',
-#         'PASSWORD': '',
-#         'HOST': os.environ['DATABASE_URL'],
-#         'PORT': '',
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '----',
-        'USER': '----',
-        'PASSWORD': '',
-        'HOST': '----',
-        'PORT': '---',
     }
 }
 
@@ -130,13 +118,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Europe/Moscow'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
@@ -166,9 +150,10 @@ ALLOWED_HOSTS = ['*']
 # X_FRAME_OPTIONS = 'DENY'
 # CSRF_COOKIE_SECURE = True
 # CSRF_COOKIE_HTTPONLY = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
-DEBUG = False
+DEBUG = True
 
 try:
     from .local_settings import *
